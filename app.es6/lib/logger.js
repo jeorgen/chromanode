@@ -1,5 +1,5 @@
 import winston from 'winston'
-
+var syslogTransport = require('winston-syslog-chroma')
 import config from './config'
 
 let logger = new winston.Logger()
@@ -9,6 +9,19 @@ logger.add(winston.transports.Console, {
   colorize: true,
   timestamp: true
 })
+
+logger.add(
+
+
+        syslogTransport, {
+            id: 'Some_String',
+            facility: 'user',
+            showPid: false
+        }
+
+
+
+)
 
 if (config.has('logger.filename')) {
   logger.add(winston.transports.File, {
